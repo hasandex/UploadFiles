@@ -1,0 +1,28 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+            <form asp-action="Create" enctype="multipart/form-data">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <label asp-for="Name" class="text text-black"></label>
+                            <input asp-for="Name" type="text" placeholder="Enter Category" />
+                           
+                        </div>
+                           <span asp-validation-for="Name" class="text text-danger"></span>
+                    </div>
+                    <div class="col-6 mt-4">
+                        <input asp-for="ImageFile" type="file" />
+                    </div>
+        <span asp-validation-for="ImageFile" class="text text-danger"></span>
+        <div class="col-4 mt-4">
+            <button type="submit" class="btn btn-success"> Create </button>
+        </div>
+                </div>
+
+               
+            </form>

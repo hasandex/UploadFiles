@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+<div class="row">
+    <div class="container mb-4 col-2">
+
+        <a asp-action="Create" class="btn btn-success"> Add Category </a>
+
+    </div>
+
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        No Categories were added yet!
+    </div>
+}
+else
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var category in Model)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                    <td>
+                        <img src="@($"{Settings.imagesPath}/{category.Image}")" style="width:400px" />
+                    </td>
+                </tr>
+              
+            }
+        </tbody>
+    </table>
+}
