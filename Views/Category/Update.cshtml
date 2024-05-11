@@ -1,0 +1,31 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Edite Category";
+}
+
+<form asp-action="Update" enctype="multipart/form-data">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Name" class="text text-black"></label>
+                <input asp-for="Name" type="text" placeholder="Enter Category" />
+                <input name="Id" type="text" hidden value="@Model.Id" />
+
+            </div>
+            <span asp-validation-for="Name" class="text text-danger"></span>
+        </div>
+        <div class="col-6 mt-4">
+            <input asp-for="ImageFile" type="file" />
+        </div>
+        <span asp-validation-for="ImageFile" class="text text-danger"></span>
+        <div class="col-4 mt-4">
+            <button type="submit" class="btn btn-success"> Update </button>
+        </div>
+        <div class="col-6 mt-4">
+            <img src="@($"{Settings.imagesPath}/{Model.Image}")" />
+        </div>
+    </div>
+
+</form>

@@ -28,6 +28,37 @@ namespace UploadFiles.Controllers
             _categoryRepo.Create(category);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Update(int categoryId)
+        {
+            var category = _categoryRepo.GetById(categoryId);
+            return View(category);
+        }
+        [HttpPost]
+        public IActionResult Update(Category category)
+        {
+            ModelState.Remove("ImageFile");
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+            if (category.ImageFile != null)
+            {
+                _categoryRepo.Update(category);
+            }
+            else
+            {
+                _categoryRepo.Update(category);
+            }
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete(int categoryId)
+        {
+            _categoryRepo.Delete(categoryId);
+            return RedirectToAction("Index");
+        }
         
+
     }
 }

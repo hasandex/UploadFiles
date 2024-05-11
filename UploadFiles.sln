@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploadFiles", "UploadFiles.csproj", "{48A2DB0C-4FAB-4369-8255-E762675D8D77}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameZone", "..\GameZone\GameZone.csproj", "{ABA26725-753E-4E2D-B707-FA6080F08FC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCoreApp", "..\TestCoreApp\TestCoreApp.csproj", "{62DA67A9-D822-4FA1-9C6F-BA411CA007DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{48A2DB0C-4FAB-4369-8255-E762675D8D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48A2DB0C-4FAB-4369-8255-E762675D8D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48A2DB0C-4FAB-4369-8255-E762675D8D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA26725-753E-4E2D-B707-FA6080F08FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA26725-753E-4E2D-B707-FA6080F08FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA26725-753E-4E2D-B707-FA6080F08FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA26725-753E-4E2D-B707-FA6080F08FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62DA67A9-D822-4FA1-9C6F-BA411CA007DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62DA67A9-D822-4FA1-9C6F-BA411CA007DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62DA67A9-D822-4FA1-9C6F-BA411CA007DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62DA67A9-D822-4FA1-9C6F-BA411CA007DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

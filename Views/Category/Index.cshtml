@@ -20,11 +20,11 @@
 }
 else
 {
-    <table class="table table-dark">
+    <table>
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
+                <th>Id</th>
+                <th>Name</th>
             </tr>
         </thead>
         <tbody>
@@ -34,11 +34,46 @@ else
                     <td>@category.Id</td>
                     <td>@category.Name</td>
                     <td>
-                        <img src="@($"{Settings.imagesPath}/{category.Image}")" style="width:400px" />
+                        <img src="@($"{Settings.imagesPath}/{category.Image}")" />
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-categoryId="@category.Id" class="btn btn-info rounded rounded-3 me-4">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-categoryId="@category.Id" class="btn btn-danger rounded rounded-3">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    
                     </td>
                 </tr>
-              
+                
+               
             }
         </tbody>
     </table>
 }
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+</style>    
