@@ -10,6 +10,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("MyCon")));
 
 builder.Services.AddScoped<ICategoryRepo,CategoryRepo>();
+builder.Services.AddScoped<IProductRepo,ProductRepo>();
+
 
 var app = builder.Build();
 

@@ -1,0 +1,27 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Product info";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <h3>@Model.Name</h3>
+        </div>
+        
+    </div>
+    <div class="row">
+        @foreach (var img in Model.ProductImages)
+        {
+           <div class="col-md-3">
+                <img src="@($"{Settings.imagesPathProducts}/{img.Path}")" alt="Image" class="img-fluid">
+        </div>
+        }
+        
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-12 text-center">
+           <a asp-action="Index" >back to products</a>
+        </div>
+</div>

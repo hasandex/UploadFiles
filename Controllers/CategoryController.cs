@@ -33,28 +33,41 @@ namespace UploadFiles.Controllers
         public IActionResult Update(int categoryId)
         {
             var category = _categoryRepo.GetById(categoryId);
+            if (category == null)
+            {
+                return NotFound();
+            }
             return View(category);
         }
         [HttpPost]
         public IActionResult Update(Category category)
         {
+            var isUpdated = 0;
             var cate = _categoryRepo.GetById(category.Id);
             if(category.ImageFile == null)
             {
                 ModelState.Remove("ImageFile");
-            }
-            
-            if (!ModelState.IsValid)
-            {
-                return View(cate);
-            }
-            if (category.ImageFile != null)
-            {
-                _categoryRepo.Update(category);
+                if (!ModelState.IsValid)
+                {
+                    return View(cate);
+                }
+                isUpdated = _categoryRepo.Update(category);
+                if(isUpdated == 0)
+                {
+                    return BadRequest();
+                }
             }
             else
             {
-                _categoryRepo.Update(category);
+                if (!ModelState.IsValid)
+                {
+                    return View(cate);
+                }
+                isUpdated = _categoryRepo.Update(category);
+                if (isUpdated == 0)
+                {
+                    return BadRequest();
+                }
             }
             return RedirectToAction("Index");
         }

@@ -11,7 +11,7 @@ $(document).ready(function () {
         });
 
         swal.fire({
-            title: 'Are you sure that you need to delete this game?',
+            title: 'Are you sure that you need to delete this category?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -26,7 +26,7 @@ $(document).ready(function () {
                     success: function () {
                         swal.fire(
                             'Deleted!',
-                            'Game has been deleted.',
+                            'Category has been deleted.',
                             'success'
                         );
 

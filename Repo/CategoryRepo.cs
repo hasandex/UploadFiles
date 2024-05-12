@@ -1,4 +1,7 @@
-﻿using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using UploadFiles.Data;
 using UploadFiles.Repo.Base;
@@ -23,15 +26,8 @@ namespace UploadFiles.Repo
         {
             var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == categoryId);
             try
-            {
-                if (category != null)
-                {
+            { 
                     return category;
-                }
-                else
-                {
-                    throw new Exception("Category not found.");
-                }
             }
             catch (Exception ex)
             {
@@ -46,7 +42,7 @@ namespace UploadFiles.Repo
             return _appDbContext.SaveChanges();
         }
 
-        public  string SaveImgInServer(IFormFile file)
+        public string SaveImgInServer(IFormFile file)
         {
             var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}";
             var path = Path.Combine($"{_webHostEnvironment.WebRootPath}{Settings.imagesPath}", fileName);
@@ -55,10 +51,8 @@ namespace UploadFiles.Repo
             return fileName ;
         }
 
-        public void Update(Category category)
+        public int Update(Category category)
         {
-            try
-            {
                 var old_category = _appDbContext.Categories.FirstOrDefault(c => c.Id == category.Id);
 
                 if (old_category != null)
@@ -75,21 +69,12 @@ namespace UploadFiles.Repo
                     }
                     _appDbContext.Entry(old_category).State = EntityState.Detached;
                     _appDbContext.Categories.Update(category);
-                    _appDbContext.SaveChanges();
+                    return _appDbContext.SaveChanges();
                 }
-                else
+                else //category is null ==>>> no category found
                 {
-                    throw new Exception("Category not found."); 
+                return 0; 
                 }
-            }
-            catch (Exception ex)
-            {
-       
-                Console.WriteLine("An error occurred: " + ex.Message);
-
-                throw;
-            }
-
         }
 
         public int Delete(int id)
@@ -115,6 +100,12 @@ namespace UploadFiles.Repo
                 throw;
             }
             
+        }
+
+        public IEnumerable<SelectListItem> GetCategoriesList()
+        {
+          return  _appDbContext.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text= c.Name})
+                .OrderBy(c=>c.Text).AsNoTracking();
         }
 
       
