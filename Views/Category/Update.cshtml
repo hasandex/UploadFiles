@@ -30,11 +30,5 @@
 </form>
 
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            $('#imageCover').on('change', function () {
-                $('.img-preview').attr('src', window.URL.createObjectURL(this.files[0]));
-            });
-        });
-    </script>
+    <script src="~/js/image_preview.js"></script>
 }

@@ -58,9 +58,9 @@ namespace UploadFiles.Controllers
             }
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int categoryId)
+        public IActionResult Delete(int id)
         {
-            _categoryRepo.Delete(categoryId);
+            _categoryRepo.Delete(id);
             return RedirectToAction("Index");
         }
         

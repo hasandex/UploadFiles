@@ -92,9 +92,9 @@ namespace UploadFiles.Repo
 
         }
 
-        public int Delete(int categoryId)
+        public int Delete(int id)
         {
-            var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == categoryId);
+            var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == id);
             try
             {
                 if (category != null)
