@@ -20,7 +20,7 @@
 }
 else
 {
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -30,7 +30,7 @@ else
         <tbody>
             @foreach(var category in Model)
             {
-                <tr>
+                <tr class="table-dark">
                     <td>@category.Id</td>
                     <td>@category.Name</td>
                     <td>

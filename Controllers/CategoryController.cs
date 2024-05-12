@@ -38,10 +38,15 @@ namespace UploadFiles.Controllers
         [HttpPost]
         public IActionResult Update(Category category)
         {
-            ModelState.Remove("ImageFile");
+            var cate = _categoryRepo.GetById(category.Id);
+            if(category.ImageFile == null)
+            {
+                ModelState.Remove("ImageFile");
+            }
+            
             if (!ModelState.IsValid)
             {
-                return View(category);
+                return View(cate);
             }
             if (category.ImageFile != null)
             {

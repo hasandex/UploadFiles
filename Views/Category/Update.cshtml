@@ -17,15 +17,24 @@
             <span asp-validation-for="Name" class="text text-danger"></span>
         </div>
         <div class="col-6 mt-4">
-            <input asp-for="ImageFile" type="file" />
+            <input asp-for="ImageFile" type="file" id="imageCover" />
         </div>
         <span asp-validation-for="ImageFile" class="text text-danger"></span>
         <div class="col-4 mt-4">
             <button type="submit" class="btn btn-success"> Update </button>
         </div>
         <div class="col-6 mt-4">
-            <img src="@($"{Settings.imagesPath}/{Model.Image}")" />
+            <img src="@($"{Settings.imagesPath}/{Model.Image}")" class="img-preview img-thumbnail img-fluid" />
         </div>
     </div>
-
 </form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#imageCover').on('change', function () {
+                $('.img-preview').attr('src', window.URL.createObjectURL(this.files[0]));
+            });
+        });
+    </script>
+}
