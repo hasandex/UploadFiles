@@ -4,7 +4,7 @@ namespace UploadFiles.Repo.Base
 {
     public interface ICategoryRepo
     {
-        IEnumerable<Category> GetAll();
+        Task <IEnumerable<Category>> GetAll();
         Category GetById(int categoryId);
         int Create(Category category);
         int Update(Category category);

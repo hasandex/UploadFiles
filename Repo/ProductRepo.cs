@@ -18,9 +18,9 @@ namespace UploadFiles.Repo
             return _appDbContext.Products.Include(p=>p.ProductImages).AsNoTracking().ToList();
         }
 
-        public int Create(CreateProductViewModel viewModel)
+        public int Create(FormProductViewModel viewModel)
         {
-
+            // try to make it in method
             List<ProductImages> productImages = new List<ProductImages>();
             foreach (var item in viewModel.FormFiles)
             {
@@ -42,7 +42,19 @@ namespace UploadFiles.Repo
 
         public int Delete(int productId)
         {
-            throw new NotImplementedException();
+            var product = _appDbContext.Products.Include(p => p.ProductImages).SingleOrDefault(p => p.Id == productId);
+            if (product != null)
+            {
+                foreach (var image in product.ProductImages)
+                {
+                    var imageName = image.Path;
+                    var path = Path.Combine($"{_webHostEnvironment.WebRootPath}{Settings.imagesPathProducts}", imageName);
+                    File.Delete(path);
+                }
+                _appDbContext.Products.Remove(product);
+                return _appDbContext.SaveChanges();    
+            }
+            return 0;
         }
 
 
@@ -74,6 +86,16 @@ namespace UploadFiles.Repo
             using var stream = File.Create(path);
             file.CopyToAsync(stream);
             return fileName;
+        }
+        public int DeleteImage(int productId)
+        {
+            var image = _appDbContext.ProductImages.FirstOrDefault(pd => pd.ProductId == productId);
+            if (image != null)
+            {
+                _appDbContext.ProductImages.Remove(image);
+                return _appDbContext.SaveChanges();
+            }
+            return 0;
         }
 
        

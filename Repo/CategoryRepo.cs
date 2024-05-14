@@ -18,9 +18,9 @@ namespace UploadFiles.Repo
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IEnumerable<Category> GetAll()
+        public async Task<IEnumerable<Category>> GetAll()
         {
-            return _appDbContext.Categories.AsNoTracking().ToList();
+            return await _appDbContext.Categories.AsNoTracking().ToListAsync();
         }
         public Category GetById(int categoryId)
         {
@@ -40,15 +40,6 @@ namespace UploadFiles.Repo
             category.Image = SaveImgInServer(category.ImageFile);
             _appDbContext.Categories.Add(category);
             return _appDbContext.SaveChanges();
-        }
-
-        public string SaveImgInServer(IFormFile file)
-        {
-            var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}";
-            var path = Path.Combine($"{_webHostEnvironment.WebRootPath}{Settings.imagesPath}", fileName);
-            using var stream = File.Create(path);
-            file.CopyToAsync(stream);
-            return fileName ;
         }
 
         public int Update(Category category)
@@ -80,8 +71,7 @@ namespace UploadFiles.Repo
         public int Delete(int id)
         {
             var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == id);
-            try
-            {
+            
                 if (category != null)
                 {
                     _appDbContext.Categories.Remove(category);
@@ -91,15 +81,8 @@ namespace UploadFiles.Repo
                 }
                 else
                 {
-                    throw new Exception("Category not found.");
+                return 0;
                 }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                throw;
-            }
-            
         }
 
         public IEnumerable<SelectListItem> GetCategoriesList()
@@ -108,6 +91,13 @@ namespace UploadFiles.Repo
                 .OrderBy(c=>c.Text).AsNoTracking();
         }
 
-      
+        public string SaveImgInServer(IFormFile file)
+        {
+            var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}";
+            var path = Path.Combine($"{_webHostEnvironment.WebRootPath}{Settings.imagesPath}", fileName);
+            using var stream = File.Create(path);
+            file.CopyToAsync(stream);
+            return fileName;
+        }
     }
 }

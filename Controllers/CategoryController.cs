@@ -10,9 +10,9 @@ namespace UploadFiles.Controllers
             _categoryRepo = categoryRepo;
         }
         private readonly ICategoryRepo _categoryRepo;
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
-            return View(_categoryRepo.GetAll());
+            return View(await _categoryRepo.GetAll());
         }
         public IActionResult Create()
         {

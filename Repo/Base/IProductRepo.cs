@@ -4,8 +4,9 @@
     {
         IEnumerable<Product> GetAll();
         Product GetById(int productId);
-        int Create(CreateProductViewModel CreateProductViewModel);
+        int Create(FormProductViewModel CreateProductViewModel);
         void Update(Product product);
         int Delete(int productId);
+        int DeleteImage(int productId);
     }
 }
